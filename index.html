@@ -11,12 +11,15 @@
             color: #333;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
 
         header {
             background-color: #e4c1f9;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         header h1 {
@@ -24,13 +27,65 @@
             font-size: 2.5em;
         }
 
-        section {
-            max-width: 600px;
-            margin: 40px auto;
-            background: white;
-            padding: 30px;
+        .content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .video-container {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            padding: 20px;
+            border: 5px solid #e4c1f9;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-controls {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .video-controls button {
+            background-color: #cdb4db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #fff;
+        }
+
+        .video-controls button:hover {
+            background-color: #b29cc9;
+        }
+
+        .form-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
         }
 
         form label {
@@ -66,47 +121,72 @@
     <p>15 août 2025 - Château de la Forêt</p>
 </header>
 
-<section>
-    <h2>Confirmez votre présence</h2>
-    <form action="https://formspree.io/f/xvgklkva" method="POST">
-        <input type="hidden" name="_redirect" value="https://seraphinbopdy.github.io/Mariage_Juillet_2025/merci.html">
-        <label>Votre nom :
-            <input type="text" name="nom" required>
-        </label>
-        <label>Votre email :
-            <input type="email" name="email" required>
-        </label>
-        <label>Nombre de personnes :
-            <input type="number" name="personnes" min="1" required>
-        </label>
-        <label>Un petit message ? (facultatif) :
-            <textarea name="message"></textarea>
-        </label>
-        <button type="submit">Je confirme 🎉</button>
-    </form>
-</section>
+<div class="content">
+    <div class="video-container">
+        <video id="weddingVideo" controls loop>
+            <source src="videos/video.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture des vidéos.
+        </video>
+        <div class="video-controls">
+            <button id="playButton">PLAY</button>
+            <button id="pauseButton">PAUSE</button>
+        </div>
+    </div>
+    <div class="form-container">
+        <form action="https://formspree.io/f/xvgklkva" method="POST">
+            <input type="hidden" name="_redirect" value="https://seraphinbopdy.github.io/Mariage_Juillet_2025/merci.html">
+            <label>Votre nom :
+                <input type="text" name="nom" required>
+            </label>
+            <label>Votre email :
+                <input type="email" name="email" required>
+            </label>
+            <label>Nombre de personnes :
+                <input type="number" name="personnes" min="1" required>
+            </label>
+            <label>Un petit message ? (facultatif) :
+                <textarea name="message"></textarea>
+            </label>
+            <button type="submit">Je confirme 🎉</button>
+        </form>
+    </div>
+</div>
 
-
-<!-- Ajoutez le script JavaScript ici -->
 <script>
+    const video = document.getElementById('weddingVideo');
+    const playButton = document.getElementById('playButton');
+    const pauseButton = document.getElementById('pauseButton');
+
+    playButton.addEventListener('click', () => {
+        video.play();
+    });
+
+    pauseButton.addEventListener('click', () => {
+        video.pause();
+    });
+
+
     const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function(event) {
         event.preventDefault(); // Empêche le comportement par défaut du formulaire
         fetch(form.action, {
-            method: form.method,
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            if (response.ok) {
-                // Redirige vers la page de remerciement
-                window.location.href = 'https://seraphinbopdy.github.io/Mariage_Juillet_2025/merci.html';
-            } else {
-                alert('Erreur lors de la soumission du formulaire.');
-            }
-        }).catch(() => alert('Erreur réseau.'));
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+        'Accept': 'application/json'
+    }
+    }).then(response => {
+        if (response.ok) {
+        // Redirige vers la page de remerciement
+        window.location.href = 'https://seraphinbopdy.github.io/Mariage_Juillet_2025/merci.html';
+    } else {
+        alert('Erreur lors de la soumission du formulaire.');
+    }
+    }).catch(() => alert('Erreur réseau.'));
     });
+
+
+
 </script>
 
 </body>
