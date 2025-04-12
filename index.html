@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Notre Mariage - RSVP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f9f4f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #e4c1f9;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #cdb4db;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #b29cc9;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bienvenue à notre mariage !</h1>
+    <p>15 août 2025 - Château de la Forêt</p>
+</header>
+
+<section>
+    <h2>Confirmez votre présence</h2>
+    <form action="https://formspree.io/f/xvgklkva" method="POST">
+        <input type="hidden" name="_redirect" value="https://tonpseudo.github.io/mariage/merci.html">
+        <label>Votre nom :
+            <input type="text" name="nom" required>
+        </label>
+        <label>Votre email :
+            <input type="email" name="email" required>
+        </label>
+        <label>Nombre de personnes :
+            <input type="number" name="personnes" min="1" required>
+        </label>
+        <label>Un petit message ? (facultatif) :
+            <textarea name="message"></textarea>
+        </label>
+        <button type="submit">Je confirme 🎉</button>
+    </form>
+</section>
+
+</body>
+</html>
